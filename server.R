@@ -18,6 +18,10 @@ shinyServer(function(input, output) {
                weight = head(weights, n = input$numWords),
               stringsAsFactors = FALSE)
   })
+
+  tweet <- reactive({
+     tweet = dbGetQuery(mongo, 'tweets', paste('{"tweetid":', input$ipTweet, '}'))
+  })
   
 #   docs <- reactive({
 #     docs <- predictions[, input$ipTopic, with=FALSE]
@@ -34,6 +38,14 @@ shinyServer(function(input, output) {
     # Show wordcloud for the topic
     wordcloud(topic$word, nrow(topic):1, c(8,.5),2,,TRUE,,.15,
               pal1,)
+  })
+
+  output$tweet <- renderText({
+    tweet()$tweet
+  })
+
+  output$tweetTopics <- renderTable({
+    tweet()
   })
     
 })

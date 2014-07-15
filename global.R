@@ -3,8 +3,9 @@ library(RJSONIO)
 
 mongo = mongoDbConnect('michelin')
 
-
 numTopics = 100
+numTweets = 1293375
+
 
 require(wordcloud)
 require(RColorBrewer)

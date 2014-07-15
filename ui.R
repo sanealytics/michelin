@@ -14,6 +14,13 @@ shinyUI(pageWithSidebar(
                 format = "Conversion #", 
                 value = 1, animate = animationOptions(interval = 2000, loop = TRUE)),
     
+    sliderInput("ipTweet", 
+                "Choose tweet:", 
+                min = 1, 
+                max = numTweets, step = 1,,
+                format = "Tweet #", 
+                value = 1, animate = animationOptions(interval = 2000, loop = TRUE)),
+    
     sliderInput("numWords",
                 "Number of words:", 
                 min = 5, max = 20, 
@@ -24,7 +31,8 @@ shinyUI(pageWithSidebar(
   mainPanel(
     tabsetPanel(
       tabPanel("Conversations", plotOutput("topicWordcloud", width = 600, height = 600)),
-      tabPanel("Raw data", tableOutput("topWords"))
+      tabPanel("Raw data", tableOutput("topWords")),
+      tabPanel("Tweet", textOutput("tweet"), tableOutput("tweetTopics"))
       #HTML('<footer>All rights reserved <a href = "mailto:saurabh.writes+whiskey@gmail.com?Subject=Social%20Transportation%20Conversations&Body=Hi%2C%0A%0AI%20saw%20your%20whiskey%20topic%20generator%20and%20I%20thought%20it%20was%20awesome%21%20Let%27s%20grab%20a%20drink.%0A%0A">Saurabh </a></footer>')  
     )
   )
