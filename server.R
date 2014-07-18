@@ -21,6 +21,15 @@ shinyServer(function(input, output) {
 
   tweet <- reactive({
      tweet = dbGetQuery(mongo, 'tweets', paste('{"tweetid":', input$ipTweet, '}'))
+     tweetIdx = as.character(tweet$tweet)
+     cat("Looking up ", tweetIdx, "\n")
+     tweettext = dbGetQuery(mongo, 'tweettext', paste('{"tweet":', tweetIdx, '}'))
+     #data.frame(screen_name = tweettext$screen_name, text = tweettext$text)
+     tweettext
+  })
+
+  urls <- reactive({
+     dbGetQuery(mongo, 'urls', paste('{"tweetid":', input$ipTweet, '}'))$url
   })
   
 #   docs <- reactive({
@@ -41,7 +50,11 @@ shinyServer(function(input, output) {
   })
 
   output$tweet <- renderText({
-    tweet()$tweet
+    tweet()$text
+  })
+
+  output$urls <- renderText({
+    urls()
   })
 
   output$tweetTopics <- renderTable({

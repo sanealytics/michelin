@@ -11,3 +11,5 @@ require(wordcloud)
 require(RColorBrewer)
 pal <- brewer.pal(9,"BuGn")
 pal1 <- pal[-(1:4)]
+
+Sys.setlocale('LC_ALL','C')
