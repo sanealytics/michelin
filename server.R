@@ -49,8 +49,9 @@ shinyServer(function(input, output) {
               pal1,)
   })
 
-  output$tweet <- renderText({
-    tweet()$text
+  output$tweet <- renderUI({
+    # Using iconv till Shiny fixes utf-8 bugs
+    HTML(iconv(tweet()$text, "UTF-8", "ASCII", sub=" "))
   })
 
   output$urls <- renderText({
