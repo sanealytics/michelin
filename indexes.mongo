@@ -1,0 +1,4 @@
+db.topics.ensureIndex({"topic": "hashed"})
+db.tweets.ensureIndex({"tweetid": "hashed"})
+db.tweettext.ensureIndex({"tweet": "hashed"})
+db.urls.ensureIndex({"tweetid": "hashed"})
